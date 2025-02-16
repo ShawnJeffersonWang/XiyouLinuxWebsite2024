@@ -1,36 +1,36 @@
-<script lang="ts" setup>
-import { computed } from "vue";
+<script setup lang="ts">
+import { computed } from 'vue'
 
 export interface MemberProps {
-    name: string;
-    title?: string;
-    qq: string;
-    github?: string;
-    linkText?: string;
-    link?: string;
+    name: string
+    title?: string
+    qq: string
+    github?: string
+    linkText?: string
+    link?: string
 }
 
-const props = defineProps<MemberProps>();
+const props = defineProps<MemberProps>()
 
 const avatarLink = computed(() => {
     return props.github
         ? `https://wsrv.nl/?url=github.com/${props.github}.png`
         : props.qq
             ? `https://q1.qlogo.cn/g?b=qq&nk=${props.qq}&s=3`
-            : `/favicon.ico`;
-});
+            : `/favicon.ico`
+})
 </script>
 
 <template>
     <div class="card">
-        <img class="avatar" :src="avatarLink" />
+        <img class="avatar" :src="avatarLink">
         <span class="name">{{ name }}</span>
         <span class="title">{{ title }}</span>
         <a v-if="github" :href="`https://github.com/${github}`" target="_blank">
-            <i class="fa-brands fa-github"></i>{{ github }}
+            <i class="fa-brands fa-github" />{{ github }}
         </a>
         <a v-if="link && linkText" :href="link" target="_blank">
-            <i class="fa-solid fa-link"></i>{{ linkText }}
+            <i class="fa-solid fa-link" />{{ linkText }}
         </a>
     </div>
 </template>
@@ -65,7 +65,7 @@ const avatarLink = computed(() => {
     color: var(--vp-c-text-3);
 }
 
-.card a {
+.card.card a {
     overflow: hidden;
     max-width: 100%;
     background: unset;
@@ -74,7 +74,7 @@ const avatarLink = computed(() => {
     text-wrap: nowrap;
 }
 
-.card a[target]::after {
+.card.card a[target]::after {
     content: unset;
 }
 </style>

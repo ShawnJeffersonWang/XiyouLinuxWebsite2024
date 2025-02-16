@@ -1,20 +1,26 @@
-// https://vitepress.dev/guide/custom-theme
-import { h } from 'vue'
+// https://vitepress.dev/zh/guide/custom-theme
 import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme-without-fonts'
-import './style.css'
 import { Icon } from '@iconify/vue'
-import Footer from '/.vitepress/components/Footer.vue'
+import DefaultTheme from 'vitepress/theme-without-fonts'
+import { h } from 'vue'
+
+import Footer from '../components/Footer.vue'
+import NotFound from '../components/NotFound.vue'
+
+import './theme-enhanced.css'
+import './style.css'
 
 export default {
-  extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'doc-bottom': () => h(Footer),
-    })
-  },
-  enhanceApp({ app, router, siteData }) {
-    app.component("Icon", Icon)
-  }
+    extends: DefaultTheme,
+    Layout: () => {
+        return h(DefaultTheme.Layout, null, {
+            // https://vitepress.dev/zh/guide/extending-default-theme#layout-slots
+            'doc-bottom': () => h(Footer),
+            'not-found': () => h(NotFound),
+        })
+    },
+    // enhanceApp({ app, router, siteData }) {
+    enhanceApp({ app }) {
+        app.component('Icon', Icon)
+    },
 } satisfies Theme
